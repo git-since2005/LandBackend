@@ -22,7 +22,7 @@ import hashlib
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={"r/*":{"origins":"https://webapp.aichef.in/"}}, supports_credentials=True)
+CORS(app)
 # jwt = JWTManager(app)
 app.secret_key = os.getenv("JWT_SECRET_KEY")  # Required for sessions
 
