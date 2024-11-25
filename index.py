@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
-from flask_dance.contrib.google import make_google_blueprint, google
+# from flask_dance.contrib.google import make_google_blueprint, google
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 import random
 from datetime import datetime
@@ -44,14 +44,14 @@ SMTP_PASSWORD = str(os.getenv("SMTP_PASSWORD"))  # Your email password
 app.config["GOOGLE_OAUTH_CLIENT_ID"] = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
 app.config["GOOGLE_OAUTH_CLIENT_SECRET"] = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
 
-google_blueprint = make_google_blueprint(
-    client_id=os.getenv('GOOGLE_OAUTH_CLIENT_ID'),
-    client_secret=os.getenv('GOOGLE_OAUTH_CLIENT_SECRET'),
-    scope=["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile",
-           "openid"]
-)
-app.register_blueprint(google_blueprint, url_prefix="/login")
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+# google_blueprint = make_google_blueprint(
+#     client_id=os.getenv('GOOGLE_OAUTH_CLIENT_ID'),
+#     client_secret=os.getenv('GOOGLE_OAUTH_CLIENT_SECRET'),
+#     scope=["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile",
+#            "openid"]
+# )
+#app.register_blueprint(google_blueprint, url_prefix="/login")
+#os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 
 # =======================================================================================================================================
