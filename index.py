@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 from pymongo import MongoClient
 # from flask_dance.contrib.google import make_google_blueprint, google
-from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
+# from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 import random
 from datetime import datetime
 
@@ -23,7 +23,7 @@ load_dotenv()
 
 app = Flask(__name__)
 CORS(app, resources={"r/*":{"origins":"https://webapp.aichef.in/"}}, supports_credentials=True)
-jwt = JWTManager(app)
+# jwt = JWTManager(app)
 app.secret_key = os.getenv("JWT_SECRET_KEY")  # Required for sessions
 
 # MongoDB configuration
