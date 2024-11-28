@@ -89,8 +89,7 @@ def send_otp():
     try:
         data = request.get_json()
         email = data.get("emails")
-        print(data)
-        if db.Email.count_documents({"email":email})>0:
+        if db.subscribers.count_documents({"email":email})>0:
             return jsonify({"msg":"Subscribed"})
         otp = str(random.randint(111111, 1000000))
         logo_url = "https://www.aichefmaster.com/assets/logo.jpeg"
@@ -179,7 +178,7 @@ def validate():
         otp = db.OTPStore.find_one({"ticket":data.get("tickets")})
         if otp['otp'] == data.get("otps"):
             db.OTPStore.delete_one({"ticket":data.get("tickets")})
-            db.Email.insert_one({"email":data.get("emails"),"createdAt":datetime.utcnow(), "features":""})
+            db.subscribers.insert_one({"email":data.get("emails"),"createdAt":datetime.utcnow(), "features":""})
             return jsonify({"msg":"v"}), 200
         else:
             return jsonify({"msg":"n"}), 200
@@ -194,7 +193,7 @@ def submitFeed():
         if len(features) == 4:
             features = "All"
         email = data.get("emails")
-        entered = db.Email.update_one({"email":email}, {"$set":{"features":features}})
+        entered = db.subscribers.update_one({"email":email}, {"$set":{"features":features}})
         # Attach the email body
         logo_url = "https://www.aichefmaster.com/assets/logo.jpeg"  # Replace with your logo URL
         social_media_html = f"""
