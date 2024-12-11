@@ -77,9 +77,9 @@ def send_email(recipient_email, subject, body):
         print(f"Failed to send email: {str(e)}")
         return False
 
-def gen_ticket(email):
+def gen_ticket():
     random_string = uuid.uuid4().hex[:45]
-    return f"{email_hash}-{random_string}"
+    return f"{random_string}"
 
 
 @app.route("/send-otp", methods=["POST"])
@@ -158,9 +158,9 @@ def send_otp():
 </html>
 """
         status = send_email(email, "Welcome to AiChefMaster", html_content)
-        ticket = gen_ticket(email)
+        ticket = gen_ticket()
         if db.OTPStore.count_documents({"ticket":ticket})>0:
-            ticket = gen_ticket(email)
+            ticket = gen_ticket()
         db.OTPStore.insert_one({"ticket":ticket, "otp":otp, "time":datetime.utcnow()})
         if status:
             return jsonify({"ticket":f"{ticket}"})
