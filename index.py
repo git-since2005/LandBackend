@@ -78,7 +78,6 @@ def send_email(recipient_email, subject, body):
         return False
 
 def gen_ticket(email):
-    email_hash = hashlib.sha256(email.encode()).hexdigest()[:10]
     random_string = uuid.uuid4().hex[:45]
     return f"{email_hash}-{random_string}"
 
