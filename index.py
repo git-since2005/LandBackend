@@ -16,7 +16,6 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import uuid
-import hashlib
 
 # Load environment variables
 load_dotenv()
@@ -80,7 +79,7 @@ def send_email(recipient_email, subject, body):
 
 def gen_ticket(email):
     email_hash = hashlib.sha256(email.encode()).hexdigest()[:10]
-    random_string = uuid.uuid4().hex[:8]
+    random_string = uuid.uuid4().hex[:45]
     return f"{email_hash}-{random_string}"
 
 
